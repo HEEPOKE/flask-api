@@ -1,15 +1,15 @@
+import os
 from flask import Flask
+from pkg.configs.database import init_db
 from pkg.configs.config import config_app
 
 app = Flask(__name__)
 
-app.config.update(config_app)
+environment = os.environ.get("FLASK_ENV")
 
-users = ['Alice', 'Bob', 'Charlie']
+app.config.from_object(config_app[environment])
 
-@app.route('/')
-def index():
-    return app.config['DATABASE_URL']
+init_db(app)
 
 if __name__ == '__main__':
     app.run()

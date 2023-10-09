@@ -3,16 +3,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+class Config:
+    DEBUG = False
+    FLASK_RUN_PORT = int(os.environ.get("FLASK_RUN_PORT"))
+    SQLALCHEMY_DATABASE_URI = f'postgresql://{os.environ["DB_USERNAME"]}:{os.environ["DB_PASSWORD"]}@localhost/{os.environ["DB_NAME"]}'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+
+class DevelopmentConfig(Config):
+    DEBUG = True
+
+class ProductionConfig(Config):
+    DEBUG = False
+
 config_app = {
-    'DEBUG': True,
-    "FLASK_APP": os.environ.get("FLASK_APP", "main.py"),
-    "DB_NAME": os.environ.get("DB_NAME", "flask"),
-    "DB_PORT": os.environ.get("DB_PORT", "5432"),
-    "DB_USERNAME": os.environ.get("DB_USERNAME", "yoyo"),
-    "DB_PASSWORD": os.environ.get("DB_PASSWORD", "yoyo5555"),
-    "DATABASE_URL": os.environ.get(
-        "DATABASE_URL", "postgresql://yoyo:5555@localhost/flask"
-    ),
-    "PORT": str(os.environ.get("PORT", 6476)),
-    "SECRET_KEY": os.environ.get("SECRET_KEY", "my_secret_key"),
+    "development": DevelopmentConfig,
+    "production": ProductionConfig
 }
