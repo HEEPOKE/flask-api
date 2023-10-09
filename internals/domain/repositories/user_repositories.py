@@ -38,3 +38,5 @@ class UserRepository:
         if user:
             db.session.delete(user)
             db.session.commit()
+            return True
+        return False
