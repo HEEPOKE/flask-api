@@ -1,4 +1,3 @@
-
 class ResponseMessages:
     USER_LIST_SUCCESS = "User list successfully"
     USER_GET_BY_ID_SUCCESS = "User getBy id successfully"

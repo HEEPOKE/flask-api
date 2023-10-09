@@ -1,2 +1,2 @@
 class Service:
-    USER_SERVICE: "user-service"
+    USER_SERVICE = "user-service"
