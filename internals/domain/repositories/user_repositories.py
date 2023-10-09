@@ -16,16 +16,8 @@ class UserRepository:
             return None
 
     @staticmethod
-    def get_user_by_username(username):
-        user = User.query.filter_by(username=username).first()
-        if user:
-            return user.to_dict()
-        else:
-            return None
-
-    @staticmethod
-    def get_user_by_email(email):
-        user = User.query.filter_by(email=email).first()
+    def get_user_by_username(email_or_username):
+        user = User.query.filter_by(username=email_or_username,email=email_or_username).first()
         if user:
             return user.to_dict()
         else:

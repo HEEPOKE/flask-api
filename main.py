@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from internals.adapters.ports.main_port import init_port
 from pkg.configs.database import db, init_db, migrate_db
 from pkg.configs.config import config_app
 
@@ -11,6 +12,8 @@ def create_app():
 
     init_db(app)
     migrate_db(app, db)
+
+    init_port(app)
 
     return app
 

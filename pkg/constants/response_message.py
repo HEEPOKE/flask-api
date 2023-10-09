@@ -2,6 +2,7 @@
 class ResponseMessages:
     USER_LIST_SUCCESS = "User list successfully"
     USER_GET_BY_ID_SUCCESS = "User getBy id successfully"
+    USER_GET_BY_EMAIL_USERNAME_SUCCESS = "User getBy email or username successfully"
     USER_CREATE_SUCCESS = "User created successfully"
     USER_UPDATE_SUCCESS = "User updated successfully"
     USER_DELETED_SUCCESS = "User deleted successfully"
