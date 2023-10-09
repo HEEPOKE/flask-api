@@ -1,3 +1,4 @@
+import bcrypt
 from internals.domain.models.user import User
 from internals.domain.repositories.user_repositories import UserRepository
 from pkg.constants.response_message import ResponseMessages
@@ -41,7 +42,7 @@ class UserHandler:
                 user,
                 400,
             )
-        
+
     @staticmethod
     def get_user_by_email_or_username(email_or_username):
         user = UserRepository.get_user_by_email_or_username(email_or_username)
@@ -61,7 +62,6 @@ class UserHandler:
                 user,
                 400,
             )
-        
 
     @staticmethod
     def create_user(user_data):
@@ -70,7 +70,10 @@ class UserHandler:
         password = user_data.get("password")
         tel = user_data.get("tel")
 
-        user = User(username=username, email=email, password=password, tel=tel)
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password.encode("utf-8"), salt)
+
+        user = User(username=username, email=email, password=hashed_password, tel=tel)
         created_user = UserRepository.create_user(user)
 
         return response(

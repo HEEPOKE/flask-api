@@ -5,6 +5,8 @@
     "python.formatting.provider": "none",
     "cSpell.words": [
         "dotenv",
+        "gensalt",
+        "hashpw",
         "jsonify",
         "onupdate",
         "pytz",
