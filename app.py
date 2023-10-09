@@ -1,14 +1,15 @@
 from flask import Flask
-from config import config
+from configs.config import config_app
 
 app = Flask(__name__)
 
-app.config.update(config)
+app.config.update(config_app)
 
 users = ['Alice', 'Bob', 'Charlie']
 
 @app.route('/')
 def index():
-    return config['DATABASE_URL']
+    return app.config['DATABASE_URL']
 
-app.run()
+if __name__ == '__main__':
+    app.run()
