@@ -5,7 +5,10 @@
     "python.formatting.provider": "none",
     "cSpell.words": [
         "dotenv",
+        "onupdate",
+        "pytz",
         "sqlalchemy",
+        "venv",
         "yoyo"
     ]
 }

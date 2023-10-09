@@ -1,15 +1,19 @@
 import os
 from flask import Flask
-from pkg.configs.database import init_db
+from pkg.configs.database import db, init_db, migrate_db
 from pkg.configs.config import config_app
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
 
-environment = os.environ.get("FLASK_ENV")
+    environment = os.environ.get("FLASK_ENV")
+    app.config.from_object(config_app[environment])
 
-app.config.from_object(config_app[environment])
+    init_db(app)
+    migrate_db(app, db)
 
-init_db(app)
+    return app
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    app = create_app()
     app.run()
