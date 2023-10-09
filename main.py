@@ -1,5 +1,5 @@
 from flask import Flask
-from configs.config import config_app
+from pkg.configs.config import config_app
 
 app = Flask(__name__)
 
