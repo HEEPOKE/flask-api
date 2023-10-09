@@ -5,7 +5,7 @@ load_dotenv()
 
 config_app = {
     'DEBUG': True,
-    "FLASK_APP": os.environ.get("FLASK_APP", "app.py"),
+    "FLASK_APP": os.environ.get("FLASK_APP", "main.py"),
     "DB_NAME": os.environ.get("DB_NAME", "flask"),
     "DB_PORT": os.environ.get("DB_PORT", "5432"),
     "DB_USERNAME": os.environ.get("DB_USERNAME", "yoyo"),
