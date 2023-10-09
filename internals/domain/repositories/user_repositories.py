@@ -9,15 +9,27 @@ class UserRepository:
 
     @staticmethod
     def get_user_by_id(user_id):
-        return User.query.get(user_id)
+        user = User.query.get(user_id)
+        if user:
+            return user.to_dict()
+        else:
+            return None
 
     @staticmethod
     def get_user_by_username(username):
-        return User.query.filter_by(username=username).first()
+        user = User.query.filter_by(username=username).first()
+        if user:
+            return user.to_dict()
+        else:
+            return None
 
     @staticmethod
     def get_user_by_email(email):
-        return User.query.filter_by(email=email).first()
+        user = User.query.filter_by(email=email).first()
+        if user:
+            return user.to_dict()
+        else:
+            return None
 
     @staticmethod
     def create_user(user):
