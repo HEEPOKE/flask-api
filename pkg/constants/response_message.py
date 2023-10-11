@@ -1,4 +1,7 @@
 class ResponseMessages:
+    TOKEN_EXPIRED = "Token has expired"
+    TOKEN_INVALID = "Invalid token"
+    TOKEN_MESSING = "Token is missing"
     AUTH_LOGIN_FAILED = " Auth login failed"
     AUTH_PASSWORD_INCORRECT = "Auth password incorrect"
     USER_LIST_SUCCESS = "User list successfully"
