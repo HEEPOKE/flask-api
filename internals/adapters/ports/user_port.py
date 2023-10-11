@@ -1,12 +1,14 @@
 from flask import Blueprint, request
 from flask_cors import cross_origin
 from internals.app.handlers.user_handler import UserHandler
+from internals.core.middleware.jwt_middleware import token_required
 
 user_port_bp = Blueprint("user_port", __name__)
 
 
 @user_port_bp.route("/users/list", methods=["GET"])
 @cross_origin()
+@token_required
 def get_all_users():
     users = UserHandler.get_all_users()
     return users
@@ -14,6 +16,7 @@ def get_all_users():
 
 @user_port_bp.route("/users/find/<int:user_id>", methods=["GET"])
 @cross_origin()
+@token_required
 def get_user_by_id(user_id):
     user = UserHandler.get_user_by_id(user_id)
     return user
@@ -21,6 +24,7 @@ def get_user_by_id(user_id):
 
 @user_port_bp.route("/users/find", methods=["GET"])
 @cross_origin()
+@token_required
 def get_user_by_email_or_username():
     email_or_username = request.args.get("email_or_username")
     user = UserHandler.get_user_by_email_or_username(email_or_username)
@@ -29,6 +33,7 @@ def get_user_by_email_or_username():
 
 @user_port_bp.route("/users/create", methods=["POST"])
 @cross_origin()
+@token_required
 def create_user():
     data = request.get_json()
     user = UserHandler.create_user(data)
@@ -37,6 +42,7 @@ def create_user():
 
 @user_port_bp.route("/users/update/<int:user_id>", methods=["PUT"])
 @cross_origin()
+@token_required
 def update_user(user_id):
     data = request.get_json()
     return UserHandler.update_user(user_id, data)
@@ -44,5 +50,6 @@ def update_user(user_id):
 
 @user_port_bp.route("/users/delete/<int:user_id>", methods=["DELETE"])
 @cross_origin()
+@token_required
 def delete_user(user_id):
     return UserHandler.delete_user(user_id)
