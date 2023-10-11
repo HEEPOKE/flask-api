@@ -4,6 +4,7 @@ class ResponseMessages:
     TOKEN_MESSING = "Token is missing"
     AUTH_LOGIN_FAILED = " Auth login failed"
     AUTH_PASSWORD_INCORRECT = "Auth password incorrect"
+    AUTH_LOGOUT_SUCCESS = "Auth logout successfully"
     USER_LIST_SUCCESS = "User list successfully"
     USER_GET_BY_ID_SUCCESS = "User getBy id successfully"
     USER_GET_BY_EMAIL_USERNAME_SUCCESS = "User getBy email or username successfully"

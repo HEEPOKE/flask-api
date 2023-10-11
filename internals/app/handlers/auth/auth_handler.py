@@ -1,5 +1,6 @@
 import bcrypt
 from internals.app.services.auth_service import AuthServices
+from internals.core.utils.jwt.token import generate_token
 from pkg.constants.response_message import ResponseMessages
 from internals.core.utils.response import response
 from pkg.constants.status import Code
@@ -10,6 +11,7 @@ class AuthHandler:
     @staticmethod
     def login(data):
         users = AuthServices.login(data.username_or_email)
+        payload = generate_token(users)
 
         if users:
             if bcrypt.checkpw(users.password.encode("utf-8"), data.password):
@@ -17,7 +19,7 @@ class AuthHandler:
                     Code.SUCCESS,
                     Service.AUTH_SERVICE,
                     ResponseMessages.USER_LIST_SUCCESS,
-                    users,
+                    payload,
                     200,
                 )
             else:
@@ -36,4 +38,13 @@ class AuthHandler:
                 None,
                 400,
             )
-        
+
+    @staticmethod
+    def logout(token):
+        return response(
+            Code.SUCCESS,
+            Service.AUTH_SERVICE,
+            ResponseMessages.AUTH_LOGOUT_SUCCESS,
+            None,
+            200,
+        )
