@@ -1,6 +1,6 @@
 import bcrypt
 from internals.app.services.auth_service import AuthServices
-from internals.core.utils.jwt.token import generate_token
+from internals.core.utils.jwt.token import generate_token, verify_token
 from pkg.constants.response_message import ResponseMessages
 from internals.core.utils.response import response
 from pkg.constants.status import Code
@@ -41,10 +41,21 @@ class AuthHandler:
 
     @staticmethod
     def logout(token):
-        return response(
-            Code.SUCCESS,
-            Service.AUTH_SERVICE,
-            ResponseMessages.AUTH_LOGOUT_SUCCESS,
-            None,
-            200,
-        )
+        verify = verify_token(token)
+
+        if verify != False:
+            return response(
+                Code.SUCCESS,
+                Service.AUTH_SERVICE,
+                ResponseMessages.AUTH_LOGOUT_SUCCESS,
+                None,
+                200,
+            )
+        else:
+            return response(
+                Code.FAILED,
+                Service.AUTH_SERVICE,
+                ResponseMessages.AUTH_LOGOUT_FAILED,
+                None,
+                400,
+            )

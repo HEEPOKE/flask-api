@@ -13,6 +13,7 @@ def login():
     auth = AuthHandler.login(data)
     return auth
 
+
 @auth_port_bp.route("/auth/register", methods=["POST"])
 @cross_origin()
 def register():
@@ -20,9 +21,10 @@ def register():
     auth = UserHandler.create_user(data)
     return auth
 
+
 @auth_port_bp.route("/auth/logout", methods=["GET"])
 @cross_origin()
 def logout():
-   token = request.headers.get("Authorization")
-    auth = AuthHandler.logout(logout)
+    token = request.headers.get("Authorization")
+    auth = AuthHandler.logout(token)
     return auth
